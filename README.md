@@ -19,6 +19,16 @@ cd heltec-flappy
 ./load-game.sh
 ```
 
+The loader creates its Python environment automatically on first use if setup has not been run yet.
+
+On a Linux desktop, install a launcher that opens a terminal and keeps startup errors visible:
+
+```bash
+./install-launcher.sh
+```
+
+Then open **Heltec Flappy** from the application menu.
+
 Disconnect the node in Meshtastic or other serial tools first. Keep PRG released while loading. The loader automatically selects a single CP2102 serial adapter; otherwise specify the port:
 
 ```bash
@@ -35,7 +45,13 @@ py -m venv .venv
 
 The loader checks that the chip is an ESP32-S3, but cannot identify the board model from that alone. This game is built for the **Heltec V3 pinout**, not every ESP32-S3 board. An optional `--mac aa:bb:cc:dd:ee:ff` argument restricts loading to one device.
 
-On Linux, your account needs access to the serial port. If loading reports permission denied, check the port's group and your distribution's serial-device permissions. If it reports busy, disconnect other serial applications.
+On Linux, your account needs access to the serial port. If loading reports permission denied, run the one-time USB setup:
+
+```bash
+./setup-usb.sh
+```
+
+It requests administrator authentication and installs a udev rule granting the active desktop user access to CP2102 serial adapters, including after reconnection. It does not change the board. If loading reports busy, disconnect other serial applications.
 
 ## Firmware stays installed
 

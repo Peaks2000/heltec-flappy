@@ -1,4 +1,5 @@
 import argparse
+import os
 import sys
 import time
 from pathlib import Path
@@ -45,6 +46,8 @@ def main():
         if len(candidates) != 1:
             raise ValueError('Specify --port for your Heltec V3; automatic selection requires exactly one CP2102 adapter')
         port = candidates[0]
+    if os.name == 'posix' and os.path.exists(port) and not os.access(port, os.R_OK | os.W_OK):
+        raise PermissionError(f'Linux denied access to {port}. Run ./setup-usb.sh once, then try again.')
     esp = esptool.detect_chip(port=port, baud=115200)
     try:
         if esp.CHIP_NAME != 'ESP32-S3':
@@ -71,5 +74,7 @@ if __name__ == '__main__':
         main()
     except (Exception, KeyboardInterrupt) as error:
         print(f'Load stopped: {error}', file=sys.stderr)
-        print('Disconnect the node in other apps and check USB permissions. No flash-write or erase operation was used.', file=sys.stderr)
+        if not isinstance(error, PermissionError):
+            print('Disconnect the node in other apps and check the selected USB port.', file=sys.stderr)
+        print('No flash-write or erase operation was used.', file=sys.stderr)
         sys.exit(1)
