@@ -1,4 +1,4 @@
-# Heltec RAM Flappy
+# Heltec Flappy
 
 A small Flappy-style game for the **Heltec WiFi LoRa 32 V3**. It runs in the ESP32-S3's internal RAM and uses the built-in OLED and **PRG button**.
 
@@ -13,8 +13,8 @@ A small Flappy-style game for the **Heltec WiFi LoRa 32 V3**. It runs in the ESP
 Requires Python 3.10+ and a USB data cable. The included binary is ready to use; a compiler is not needed.
 
 ```bash
-git clone https://github.com/Peaks2000/heltec-ram-flappy.git
-cd heltec-ram-flappy
+git clone https://github.com/Peaks2000/heltec-flappy.git
+cd heltec-flappy
 ./setup.sh
 ./load-game.sh
 ```
