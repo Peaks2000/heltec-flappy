@@ -1,0 +1,9 @@
+ets_delay_us = 0x40000600;
+ets_printf = 0x400005d0;
+disable_default_watchdog = 0x40000714;
+uart_rx_one_char = 0x40000660;
+uart_tx_one_char = 0x40000648;
+rom_gpio_pad_select_gpio = 0x40001b0c;
+rom_gpio_matrix_out = 0x40001aa0;
+rom_gpio_pad_pullup = 0x40001b00;
+rom_gpio_pad_input_enable = 0x40001ae8;
